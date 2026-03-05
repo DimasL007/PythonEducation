@@ -1,13 +1,11 @@
 from fastapi import FastAPI
+from routers.users import router as users_router
 
 app = FastAPI()
 
+# Підключаємо тільки те, що реально існує
+app.include_router(users_router)
 
 @app.get("/")
-async def root():
-    return {"message": "Hello DimaL007"}
-
-
-@app.get("/hello/{name}")
-async def say_hello(name: str):
-    return {"message": f"Hello {name}"}
+def root():
+    return {"message": "Hello Dima! Server is running!"}

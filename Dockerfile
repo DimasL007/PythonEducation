@@ -1,19 +1,16 @@
-FROM python:3.12-slim
+FROM python:3.11-slim
 
-WORKDIR /app
+WORKDIR /code
 
-# Встановлюємо Poetry
-RUN pip install poetry
+# Копіюємо файл зі списком бібліотек
+COPY requirements.txt .
 
-# Копіюємо конфігурацію (зірочка рятує, якщо лок-файлу немає)
-COPY pyproject.toml poetry.lock* ./
+# Встановлюємо бібліотеки звичайним піпом
+RUN pip install --no-cache-dir --upgrade pip \
+    && pip install --no-cache-dir -r requirements.txt
 
-# Встановлюємо залежності без створення віртуального середовища
-RUN poetry config virtualenvs.create false \
-    && poetry install --no-interaction --no-ansi --no-root
-
-# Копіюємо решту коду
+# Копіюємо весь твій код (папку app, run.py тощо)
 COPY . .
 
-# Запуск
-CMD ["poetry", "run", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+# Запускаємо через точку входу
+CMD ["python", "run.py"]

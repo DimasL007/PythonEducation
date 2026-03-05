@@ -2,13 +2,18 @@
 name = "1practiceprogramingpython"
 version = "0.1.0"
 description = ""
-authors = ["Your Name <you@example.com>"]
+authors = ["DimaL007"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
 fastapi = "^0.133.1"
 uvicorn = "^0.41.0"
+email-validator = "^2.3.0"
+myapplication = "^0.1.0"
+the-new-hotness = "^1.3.0"
+django-email-users = "^2.1.0"
+pydantic2 = "^1.1.15"
 
 
 [build-system]

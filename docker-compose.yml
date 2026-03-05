@@ -1,20 +1,11 @@
 version: '3.8'
 
 services:
-  api:
+  app:
     build: .
     ports:
       - "8000:8000"
     volumes:
-      - .:/app  # ВАЖЛИВО: це підмонтовує твою папку до контейнера для автоперезагрузки
-    depends_on:
-      - db
-
-  db:
-    image: postgres:15-alpine
+      - .:/code
     environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: fastapidb
-    ports:
-      - "5432:5432"
+      - PYTHONUNBUFFERED=1
